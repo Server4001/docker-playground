@@ -14,3 +14,8 @@ cp /vagrant/config/vimrc ~/.vimrc
 sudo cp /vagrant/config/vimrc /root/.vimrc
 
 sudo cp /vagrant/config/root.bashrc /root/.bashrc
+
+curl -L https://raw.githubusercontent.com/docker/compose/$(docker-compose --version | awk 'NR==1{print $NF}')/contrib/completion/bash/docker-compose > docker-compose
+sudo mv docker-compose /etc/bash_completion.d/docker-compose
+sudo chown root:root /etc/bash_completion.d/docker-compose
+sudo chmod 644 /etc/bash_completion.d/docker-compose

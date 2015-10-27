@@ -7,6 +7,7 @@ web:
     - ./src/php-nginx.conf:/etc/nginx/sites-enabled/php-nginx.conf
   links:
     - php
+  mem_limit: 128000000
 php:
   image: nmcteam/php56:latest
   volumes:
@@ -14,6 +15,7 @@ php:
     - ./src:/var/www
   links:
     - db
+  mem_limit: 256000000
 db:
   image: sameersbn/mysql:latest
   volumes:
@@ -22,3 +24,4 @@ db:
     - DB_NAME=demoDb
     - DB_USER=demoUser
     - DB_PASS=demoPass
+  mem_limit: 128000000

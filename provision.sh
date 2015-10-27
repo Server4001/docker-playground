@@ -12,3 +12,5 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 cp /vagrant/config/vimrc ~/.vimrc
 sudo cp /vagrant/config/vimrc /root/.vimrc
+
+sudo cp /vagrant/config/root.bashrc /root/.bashrc

@@ -1,0 +1,59 @@
+<?php
+
+// ** MySQL settings - You can get this info from your web host ** //
+/** The name of the database for WordPress */
+define('DB_NAME', 'database_name_here');
+
+/** MySQL database username */
+define('DB_USER', 'username_here');
+
+/** MySQL database password */
+define('DB_PASSWORD', 'password_here');
+
+/** MySQL hostname */
+define('DB_HOST', 'localhost');
+
+/** Database Charset to use in creating database tables. */
+define('DB_CHARSET', 'utf8');
+
+/** The Database Collate type. Don't change this if in doubt. */
+define('DB_COLLATE', '');
+
+/**#@+
+ * Authentication Unique Keys and Salts.
+ *
+ * Change these to different unique phrases!
+ * You can generate these using the {@link https://api.wordpress.org/secret-key/1.1/salt/ WordPress.org secret-key service}
+ * You can change these at any point in time to invalidate all existing cookies. This will force all users to have to log in again.
+ *
+ * @since 2.6.0
+ */
+define('AUTH_KEY',         '*0*t-*h6}Fwi+~UiY<lKn0O@$}P4`33ZsG+>Ut`H|lI pw;vexAoodYN()O_%-~V');
+define('SECURE_AUTH_KEY',  'wJd^Tf8|b~6>|4ROBHUGsZo[DH6h1jwc*8?EPmKlA[X[|WIXR[rj.*r-+#pr*o3E');
+define('LOGGED_IN_KEY',    'S<J0Yrl=}Ux%#^Wj!A/BS;DGc;;H0+H7Z1IqeTnGGp|PHK+;Gm!h|O+9e/o%aoR9');
+define('NONCE_KEY',        'qI^([JTLaJV-/M]nq7+u=t`_uu1.eo7Pmn}HQZLLdXL`1J7U^L+?a!~@KSKJq^)^');
+define('AUTH_SALT',        'aa+>2QiY&oivX8k [}E}7FU)~.[~=NYdo^~KcIM}7(}1o9DOI2Cv(G9`/%wg+~SM');
+define('SECURE_AUTH_SALT', 'J:bW1D2B[4#|#:?WprpJOQILqv/+K;Kme5|X}=B-l>-+tX;IUX2yQIgjh(bOi&t:');
+define('LOGGED_IN_SALT',   ')o#K}J/l~U$b89Te9Er:9t8Lr?KK_7k90InpN IV[kBN8-ty?x&2Gk`q+w.Ok}x6');
+define('NONCE_SALT',       'pu#t#)OV[|U5>P*)fu[q;PnwLt:a6~Y];hg*;5UVj:B$msPWzhK.rhC@#Pn K+Wn');
+
+/**#@-*/
+
+/**
+ * WordPress Database Table prefix.
+ *
+ * You can have multiple installations in one database if you give each a unique
+ * prefix. Only numbers, letters, and underscores please!
+ */
+$table_prefix  = 'wp_';
+
+/**
+ * For developers: WordPress debugging mode.
+ *
+ * Change this to true to enable the display of notices during development.
+ * It is strongly recommended that plugin and theme developers use WP_DEBUG
+ * in their development environments.
+ */
+define('WP_DEBUG', false);
+
+// Any additional default config overrides should go here.

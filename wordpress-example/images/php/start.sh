@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-service php5-fpm start
+php5-fpm -c /etc/php5/fpm/php.ini --fpm-config /etc/php5/fpm/php-fpm.conf

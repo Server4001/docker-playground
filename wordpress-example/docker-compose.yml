@@ -8,6 +8,7 @@ web:
   links:
     - php
   mem_limit: 128000000
+  container_name: "web"
 php:
   image: server4001/php-fpm:0.3.1
   volumes:
@@ -16,6 +17,8 @@ php:
   links:
     - db
   mem_limit: 256000000
+  container_name: "php"
+  command: usermod -u 1000 www-data && /sbin/my_init
 db:
   image: sameersbn/mysql:latest
   volumes:
@@ -25,3 +28,4 @@ db:
     - DB_USER=dockerpress_user
     - DB_PASS=dockerpress_password
   mem_limit: 128000000
+  container_name: "db"

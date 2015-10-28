@@ -1,2 +1,4 @@
 .vagrant
 .idea
+wordpress-example/src/vendor
+wordpress-example/src/public/wp

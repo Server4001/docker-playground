@@ -1,0 +1,27 @@
+web:
+  image: server4001/nginx:0.1.0
+  ports:
+    - "80:80"
+  volumes:
+    - ./src:/var/www
+    - ./docker-config/nginx-wordpress.conf:/etc/nginx/sites-enabled/php-nginx.conf
+  links:
+    - php
+  mem_limit: 128000000
+php:
+  image: server4001/php-fpm:0.3.1
+  volumes:
+    - ./docker-config/php-fpm.conf:/etc/php5/fpm/php-fpm.conf
+    - ./src:/var/www
+  links:
+    - db
+  mem_limit: 256000000
+db:
+  image: sameersbn/mysql:latest
+  volumes:
+    - /var/lib/mysql
+  environment:
+    - DB_NAME=dockerpress
+    - DB_USER=dockerpress_user
+    - DB_PASS=dockerpress_password
+  mem_limit: 128000000

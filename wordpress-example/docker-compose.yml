@@ -19,6 +19,7 @@ php:
   links:
     - db
     - memcached
+    - redis
   mem_limit: 256000000
   container_name: "php"
 db:

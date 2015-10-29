@@ -3,3 +3,4 @@
 wordpress-example/src/vendor
 wordpress-example/src/public/wp
 wordpress-example/src/public/wp-config-local.php
+wordpress-example/src/public/wp-content/uploads

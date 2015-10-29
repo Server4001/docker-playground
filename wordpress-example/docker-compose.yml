@@ -5,6 +5,7 @@ web:
   volumes:
     - ./src:/var/www
     - ./docker-config/nginx-wordpress.conf:/etc/nginx/sites-enabled/php-nginx.conf
+    - ./docker-config/nginx.conf:/etc/nginx/nginx.conf
   links:
     - php
   mem_limit: 128000000
@@ -13,9 +14,11 @@ php:
   image: server4001/php-fpm:0.3.3
   volumes:
     - ./docker-config/php-fpm.conf:/etc/php5/fpm/php-fpm.conf
+    - ./docker-config/memcache.ini:/etc/php5/mods-available/memcache.ini
     - ./src:/var/www
   links:
     - db
+    - memcached
   mem_limit: 256000000
   container_name: "php"
 db:
@@ -28,3 +31,8 @@ db:
     - DB_PASS=dockerpress_password
   mem_limit: 128000000
   container_name: "db"
+memcached:
+  image: memcached:1.4.24
+  command: memcached -m 128
+  mem_limit: 128000000
+  container_name: "memcached"

@@ -10,7 +10,7 @@ web:
   mem_limit: 128000000
   container_name: "web"
 php:
-  image: server4001/php-fpm:0.3.2
+  image: server4001/php-fpm:0.3.3
   volumes:
     - ./docker-config/php-fpm.conf:/etc/php5/fpm/php-fpm.conf
     - ./src:/var/www

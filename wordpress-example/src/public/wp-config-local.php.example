@@ -57,3 +57,5 @@ $table_prefix  = 'wp_';
 define('WP_DEBUG', false);
 
 // Any additional default config overrides should go here.
+define('DISALLOW_FILE_EDIT', true);
+define('DISALLOW_FILE_MODS', true);

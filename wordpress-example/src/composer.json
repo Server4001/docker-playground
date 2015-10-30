@@ -24,5 +24,10 @@
     "extra": {
         "webroot-dir": "public/wp",
         "webroot-package": "wordpress/wordpress"
+    },
+    "autoload": {
+        "psr-4": {
+            "LoginLimiter\\": "public/wp-content/plugins/login-limiter-redis/lib/"
+        }
     }
 }

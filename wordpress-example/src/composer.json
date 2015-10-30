@@ -19,7 +19,8 @@
     ],
     "require": {
         "wordpress/wordpress": "4.3.1",
-        "predis/predis": "1.0.3"
+        "predis/predis": "1.0.3",
+        "danielmewes/php-rql": "dev-master"
     },
     "extra": {
         "webroot-dir": "public/wp",

@@ -4,9 +4,57 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6a9f23e3e92e7ca783f2f2b1db02280b",
-    "content-hash": "ab2d4f90f292424f582a46675dc6945b",
+    "hash": "410b85e402da94a6d8d94492129e98c9",
+    "content-hash": "5a0c9caac01d71a982f49df9b85e068f",
     "packages": [
+        {
+            "name": "danielmewes/php-rql",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/danielmewes/php-rql.git",
+                "reference": "e04ae599baf01177681f881e7a8a6934c83fa5ba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/danielmewes/php-rql/zipball/e04ae599baf01177681f881e7a8a6934c83fa5ba",
+                "reference": "e04ae599baf01177681f881e7a8a6934c83fa5ba",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/rdb/rdb.php"
+                ]
+            },
+            "notification-url": "http://packagist.org/downloads/",
+            "include-path": [
+                "src/"
+            ],
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Mewes",
+                    "email": "danielmewes@onlinehome.de",
+                    "homepage": "http://dmewes.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A PHP client driver for the RethinkDB query language (ReQL)",
+            "homepage": "http://danielmewes.github.io/php-rql/",
+            "keywords": [
+                "database",
+                "driver",
+                "reql",
+                "rethinkdb"
+            ],
+            "time": "2015-09-21 02:41:43"
+        },
         {
             "name": "fancyguy/webroot-installer",
             "version": "1.1.0",
@@ -116,7 +164,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "danielmewes/php-rql": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

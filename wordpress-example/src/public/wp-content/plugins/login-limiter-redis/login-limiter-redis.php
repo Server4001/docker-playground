@@ -15,5 +15,12 @@ define("BB_LRLR_PROJECT_ROOT", dirname(dirname(WP_CONTENT_DIR)));
 require BB_LRLR_PROJECT_ROOT . "/vendor/autoload.php";
 
 use LoginLimiter\SetupHooks;
+use Predis\Client;
 
-$hooks = new SetupHooks();
+$redis = new Client(array(
+    'scheme' => 'tcp',
+    'host'   => 'redis',
+    'port'   => 6379,
+));
+
+$hooks = new SetupHooks($redis);

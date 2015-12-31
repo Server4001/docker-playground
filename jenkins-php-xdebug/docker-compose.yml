@@ -1,0 +1,14 @@
+jenkins:
+  build: ./jenkins
+  volumes:
+    - /data/jenkins/var/jenkins_home:/var/jenkins_home
+  ports:
+    - "80:8080"
+    - "50000:50000"
+  environment:
+    - HOST_PATH=/data/jenkins
+
+swarm-client:
+  build: ./swarm-client
+  volumes:
+      - ./swarm-client/php-conf.d:/php-conf.d

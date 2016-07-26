@@ -1,16 +1,41 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 Vagrant.configure(2) do |config|
-    config.vm.box = "ubuntu/trusty64"
+  config.vm.define "ubuntu" do |ubuntu|
+    ubuntu.vm.box = "ubuntu/trusty64"
+    ubuntu.vm.box_version = "20160208.0.0"
 
-    config.vm.network :private_network, ip: "192.168.35.41"
-    config.vm.network :forwarded_port, guest: 22, host: 6291
+    ubuntu.vm.network :private_network, ip: "192.168.35.41"
+    ubuntu.vm.network :forwarded_port, guest: 22, host: 6291, auto_correct: true
 
-    config.vm.provision :shell, path: "provision.sh", privileged: false
+    ubuntu.vm.provision :shell, path: "provision-ubuntu.sh", privileged: false
 
-    config.vm.synced_folder "./", "/vagrant", mount_options: ["dmode=775,fmode=664"]
-    config.vm.provider "virtualbox" do |vb|
-        vb.memory = 1024
-        vb.cpus = 1
+    ubuntu.vm.synced_folder "./", "/vagrant", mount_options: ["dmode=775,fmode=664"]
+
+    ubuntu.vm.provider "virtualbox" do |vb|
+      vb.customize ["modifyvm", :id, "--cpuexecutioncap", "90"]
+      vb.customize ["modifyvm", :id, "--memory", "1024"]
+      vb.customize ["modifyvm", :id, "--cpus", "1"]
+      vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
     end
+  end
+
+  config.vm.define "centos" do |centos|
+    centos.vm.box = "bento/centos-6.7"
+    centos.vm.box_version = "2.2.7"
+
+    centos.vm.network :private_network, ip: "192.168.35.45"
+    centos.vm.network :forwarded_port, guest: 22, host: 6292, auto_correct: true
+
+    centos.vm.provision :shell, path: "provision-centos.sh", privileged: false
+
+    centos.vm.synced_folder "./", "/vagrant", mount_options: ["dmode=775,fmode=664"]
+
+    centos.vm.provider "virtualbox" do |vb|
+      vb.customize ["modifyvm", :id, "--cpuexecutioncap", "90"]
+      vb.customize ["modifyvm", :id, "--memory", "1024"]
+      vb.customize ["modifyvm", :id, "--cpus", "1"]
+      vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    end
+  end
 end

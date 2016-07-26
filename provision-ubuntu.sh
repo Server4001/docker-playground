@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Add docker repo.
 sudo apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-sudo cp /vagrant/config/docker.list /etc/apt/sources.list.d/docker.list
+sudo cp /vagrant/config/ubuntu/docker.list /etc/apt/sources.list.d/docker.list
 
 # Install docker.
 sudo apt-get update
@@ -15,11 +15,11 @@ sudo mv docker-compose /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
 # Add vim config.
-cp /vagrant/config/vimrc ~/.vimrc
-sudo cp /vagrant/config/vimrc /root/.vimrc
+cp /vagrant/config/ubuntu/vimrc ~/.vimrc
+sudo cp /vagrant/config/ubuntu/vimrc /root/.vimrc
 
 # Add root user bash auto-completion.
-sudo cp /vagrant/config/root.bashrc /root/.bashrc
+sudo cp /vagrant/config/ubuntu/root.bashrc /root/.bashrc
 
 # Add auto-completion for docker-compose.
 curl -L https://raw.githubusercontent.com/docker/compose/$(docker-compose --version | awk 'NR==1{print $NF}')/contrib/completion/bash/docker-compose > docker-compose

@@ -8,7 +8,7 @@ cp /vagrant/config/centos/bash/vagrant.bashrc /home/vagrant/.bashrc
 sudo yum install -y epel-release
 
 # Install Vim, tree, etc.
-sudo yum install -y vim tree git
+sudo yum install -y vim tree git man man-pages
 
 # Add Docker group.
 sudo groupadd docker

@@ -29,7 +29,7 @@ Vagrant.configure(2) do |config|
 
     centos.vm.provision :shell, path: "provision-centos.sh", privileged: false
 
-    centos.vm.synced_folder "./", "/vagrant", mount_options: ["dmode=775,fmode=664"]
+    centos.vm.synced_folder "./", "/vagrant", mount_options: ["dmode=777,fmode=777"]
 
     centos.vm.provider "virtualbox" do |vb|
       vb.customize ["modifyvm", :id, "--cpuexecutioncap", "90"]

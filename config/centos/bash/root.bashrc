@@ -12,3 +12,4 @@ if [ -f /etc/bashrc ]; then
 fi
 
 alias ll="ls -lah"
+

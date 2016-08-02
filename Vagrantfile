@@ -21,13 +21,13 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.define "centos" do |centos|
-    centos.vm.box = "bento/centos-6.7"
-    centos.vm.box_version = "2.2.7"
+    centos.vm.box = "boxcutter/centos72-docker"
+    centos.vm.box_version = "2.0.14"
 
     centos.vm.network :private_network, ip: "192.168.35.45"
     centos.vm.network :forwarded_port, guest: 22, host: 6292, auto_correct: true
 
-    centos.vm.provision :shell, path: "provision-centos.sh", privileged: false
+    # centos.vm.provision :shell, path: "provision-centos.sh", privileged: false
 
     centos.vm.synced_folder "./", "/vagrant", mount_options: ["dmode=777,fmode=777"]
 

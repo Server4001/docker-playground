@@ -1,46 +1,65 @@
-web:
-  image: server4001/nginx:0.1.0
-  ports:
-    - "80:80"
-  volumes:
-    - ./src:/var/www
-    - ./docker-config/nginx-wordpress.conf:/etc/nginx/sites-enabled/php-nginx.conf
-    - ./docker-config/nginx.conf:/etc/nginx/nginx.conf
-  links:
-    - php
-  mem_limit: 128000000
-  container_name: "web"
-php:
-  image: server4001/php-fpm:0.3.3
-  volumes:
-    - ./docker-config/php-fpm.conf:/etc/php5/fpm/php-fpm.conf
-    - ./docker-config/memcache.ini:/etc/php5/mods-available/memcache.ini
-    - ./src:/var/www
-  links:
-    - db
-    - memcached
-    - redis
-  mem_limit: 256000000
-  container_name: "php"
-db:
-  image: sameersbn/mysql:latest
-  volumes:
-    - /var/lib/mysql
-  environment:
-    - DB_NAME=dockerpress
-    - DB_USER=dockerpress_user
-    - DB_PASS=dockerpress_password
-  mem_limit: 128000000
-  container_name: "db"
-memcached:
-  image: memcached:1.4.24
-  command: memcached -m 128
-  mem_limit: 128000000
-  container_name: "memcached"
-redis:
-  image: redis:3.0.5
-  command: redis-server --appendonly yes
-  volumes:
-    - /opt/redis-storage:/data
-  mem_limit: 128000000
-  container_name: "redis"
+version: '2'
+
+services:
+  web:
+    build:
+      context: ../example-docker-compose/images/nginx
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - ./src:/var/www
+      - ./docker-config/nginx-wordpress.conf:/etc/nginx/sites-enabled/php-nginx.conf
+      - ./docker-config/nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - wordpress-network
+    mem_limit: 128000000
+    container_name: "web"
+
+  php:
+    build:
+      context: ./images/php
+      dockerfile: Dockerfile
+    volumes:
+      - ./docker-config/php-fpm.conf:/etc/php5/fpm/php-fpm.conf
+      - ./docker-config/memcache.ini:/etc/php5/mods-available/memcache.ini
+      - ./src:/var/www
+    networks:
+      - wordpress-network
+    mem_limit: 256000000
+    container_name: "php"
+
+  db:
+    image: sameersbn/mysql:latest
+    volumes:
+      - /opt/mysql-storage:/var/lib/mysql
+    environment:
+      - DB_NAME=dockerpress
+      - DB_USER=dockerpress_user
+      - DB_PASS=dockerpress_password
+    networks:
+      - wordpress-network
+    mem_limit: 128000000
+    container_name: "db"
+
+  memcached:
+    image: memcached:1.4.24
+    command: memcached -m 128
+    networks:
+      - wordpress-network
+    mem_limit: 128000000
+    container_name: "memcached"
+
+  redis:
+    image: redis:3.0.5
+    command: redis-server --appendonly yes
+    volumes:
+      - /opt/redis-storage:/data
+    networks:
+      - wordpress-network
+    mem_limit: 128000000
+    container_name: "redis"
+
+networks:
+  wordpress-network:
+    driver: bridge

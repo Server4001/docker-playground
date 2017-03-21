@@ -1,4 +1,4 @@
-FROM node:4.4.7
+FROM node:6.10.0
 MAINTAINER Brice Bentler <me@bricebentler.com>
 WORKDIR /var/www/html
 EXPOSE 3000

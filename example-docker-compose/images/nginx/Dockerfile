@@ -1,6 +1,9 @@
 FROM phusion/baseimage:0.9.17
 MAINTAINER Brice Bentler <me@bricebentler.com>
 
+# Prevent dpkg errors
+ENV TERM=xterm-256color
+
 CMD ["/sbin/my_init"]
 
 RUN apt-get update && apt-get install -y python-software-properties

@@ -20,7 +20,7 @@ RUN mkdir -p /var/log/php-fpm
 RUN ln -sf /dev/stdout /var/log/php-fpm/access.log
 RUN ln -sf /dev/stderr /var/log/php-fpm/error.log
 
-RUN mkdir -p /etc/service/php-fpm
+RUN mkdir -p /etc/service/php-fpm && mkdir -p /run/php
 ADD start.sh /etc/service/php-fpm/run
 RUN chmod +x /etc/service/php-fpm/run
 

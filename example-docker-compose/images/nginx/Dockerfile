@@ -2,7 +2,7 @@ FROM phusion/baseimage:0.9.17
 MAINTAINER Brice Bentler <me@bricebentler.com>
 
 # Prevent dpkg errors
-ENV TERM=xterm-256color
+ENV DEBIAN_FRONTEND=noninteractive
 
 CMD ["/sbin/my_init"]
 

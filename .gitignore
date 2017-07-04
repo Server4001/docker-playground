@@ -8,4 +8,11 @@ nodejs-example/node_modules
 redis-storage
 mysql-storage
 silex-alpine-example/app/vendor
+/laravel-example/node_modules
+/laravel-example/public/storage
+/laravel-example/vendor
+/laravel-example/.idea
+/laravel-exampleHomestead.json
+/laravel-exampleHomestead.yaml
+/laravel-example.env
 

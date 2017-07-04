@@ -3,6 +3,7 @@ FROM alpine:3.6
 MAINTAINER Brice Bentler "me@bricebentler.com"
 
 RUN apk --update add \
+    curl \
     php7 \
     php7-common \
     php7-curl \
@@ -20,6 +21,7 @@ RUN apk --update add \
     php7-opcache \
     php7-openssl \
     php7-pcntl \
+    php7-phar \
     php7-pdo \
     php7-pdo_mysql \
     php7-pdo_sqlite \
@@ -31,10 +33,13 @@ RUN apk --update add \
     php7-xmlrpc \
     php7-xmlwriter \
     php7-zip \
+    php7-zlib \
     && rm -rf /var/cache/apk/* \
     # Send access and error logs to Docker log collector.
     && ln -sf /dev/stdout /var/log/php7/access.log \
-    && ln -sf /dev/stderr /var/log/php7/error.log
+    && ln -sf /dev/stderr /var/log/php7/error.log \
+    && curl -sS https://getcomposer.org/installer | \
+        php -d allow_url_fopen=On -- --install-dir=/usr/bin --filename=composer
 
 COPY config/php.ini /etc/php7/conf.d/50-setting.ini
 COPY config/php-fpm.conf /etc/php7/php-fpm.conf

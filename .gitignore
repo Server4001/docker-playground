@@ -7,4 +7,5 @@ wordpress-example/src/public/wp-content/uploads
 nodejs-example/node_modules
 redis-storage
 mysql-storage
+silex-alpine-example/app/vendor
 

@@ -9,3 +9,9 @@ docker build -f app.prod.Dockerfile -t server4001/laravel-prod:0.1.0 .
 # Creating self-signed SSL cert:
 openssl genrsa -out dev.dockerubuntu.loc.key 2048
 openssl req -new -x509 -key dev.dockerubuntu.loc.key -out dev.dockerubuntu.loc.cert -days 3650 -subj /CN=dev.dockerubuntu.loc
+
+# Build production web server image:
+docker build -f web.prod.Dockerfile -t server4001/laravel-web-prod:0.1.0 .
+
+# Start the containers:
+LE_DIR=./certs docker-compose -f docker-compose.prod.yml up

@@ -4,6 +4,7 @@ services:
   app:
     # See the build command in ./INSTRUCTIONS.sh
     image: server4001/laravel-prod:0.1.0
+    working_dir: /var/www
     volumes:
       # This creates a persistent volume that survives container stops/starts.
       - /var/www/storage
@@ -11,3 +12,29 @@ services:
     environment:
       - "DB_HOST=database"
       - "REDIS_HOST=cache"
+
+  web:
+    # See the build command in ./INSTRUCTIONS.sh
+    image: server4001/laravel-web-prod:0.1.0
+    volumes:
+      # Where $LE_DIR === './certs'
+      - "${LE_DIR}:/etc/letsencrypt"
+    ports:
+      - 80:80
+      - 443:443
+
+  database:
+    image: mysql:5.6
+    volumes:
+      - dbdata:/var/lib/mysql
+    environment:
+      - "MYSQL_DATABASE=homestead"
+      - "MYSQL_USER=homestead"
+      - "MYSQL_PASSWORD=secret"
+      - "MYSQL_ROOT_PASSWORD=secret"
+
+  cache:
+    image: redis:3.0-alpine
+
+volumes:
+  dbdata:

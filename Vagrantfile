@@ -8,7 +8,7 @@ Vagrant.configure(2) do |config|
     ubuntu.vm.network :private_network, ip: "192.168.35.41"
     ubuntu.vm.network :forwarded_port, guest: 22, host: 6291, auto_correct: true
 
-    ubuntu.vm.provision :shell, path: "provision-ubuntu.sh", privileged: false
+    ubuntu.vm.provision :shell, path: "provision-ubuntu.sh", privileged: true
 
     ubuntu.vm.synced_folder "./", "/vagrant", mount_options: ["dmode=775,fmode=664"]
 
@@ -27,7 +27,7 @@ Vagrant.configure(2) do |config|
     centos.vm.network :private_network, ip: "192.168.35.45"
     centos.vm.network :forwarded_port, guest: 22, host: 6292, auto_correct: true
 
-    centos.vm.provision :shell, path: "provision-centos.sh", privileged: false
+    centos.vm.provision :shell, path: "provision-centos.sh", privileged: true
 
     centos.vm.synced_folder "./", "/vagrant", mount_options: ["dmode=777,fmode=777"]
 

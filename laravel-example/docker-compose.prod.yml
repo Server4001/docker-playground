@@ -1,0 +1,13 @@
+version: '2'
+
+services:
+  app:
+    # See the build command in ./INSTRUCTIONS.sh
+    image: server4001/laravel-prod:0.1.0
+    volumes:
+      # This creates a persistent volume that survives container stops/starts.
+      - /var/www/storage
+    env_file: '.env.prod'
+    environment:
+      - "DB_HOST=database"
+      - "REDIS_HOST=cache"

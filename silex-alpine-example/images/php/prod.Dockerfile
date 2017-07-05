@@ -43,8 +43,9 @@ RUN apk --update add \
     && ln -sf /dev/stdout /var/log/php7/access.log \
     && ln -sf /dev/stderr /var/log/php7/error.log \
     && curl -sS https://getcomposer.org/installer | \
-        php -d allow_url_fopen=On -- --install-dir=/usr/bin --filename=composer \
-    && php /usr/bin/composer install --no-dev --optimize-autoloader \
+        php -d allow_url_fopen=On -- --install-dir=/usr/bin --filename=composer
+
+RUN php -d allow_url_fopen=1 /usr/bin/composer install --no-dev --optimize-autoloader \
     && rm /usr/bin/composer
 
 COPY config/php.ini /etc/php7/conf.d/50-setting.ini

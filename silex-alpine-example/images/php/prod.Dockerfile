@@ -47,9 +47,9 @@ RUN apk --update add \
     && php /usr/bin/composer install --no-dev --optimize-autoloader \
     && rm /usr/bin/composer
 
-COPY config/php/php.ini /etc/php7/conf.d/50-setting.ini
-COPY config/php/php-fpm.conf /etc/php7/php-fpm.conf
-COPY config/php/pool.conf /etc/php7/php-fpm.d/www.conf
+COPY config/php.ini /etc/php7/conf.d/50-setting.ini
+COPY config/php-fpm.conf /etc/php7/php-fpm.conf
+COPY config/pool.conf /etc/php7/php-fpm.d/www.conf
 
 EXPOSE 9000
 

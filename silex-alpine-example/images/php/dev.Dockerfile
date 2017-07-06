@@ -29,6 +29,7 @@ RUN apk --update add \
     php7-pdo_sqlite \
     php7-posix \
     php7-sqlite3 \
+    php7-tokenizer \
     php7-xdebug \
     php7-xml \
     php7-xmlreader \

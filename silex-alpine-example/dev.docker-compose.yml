@@ -1,29 +1,32 @@
 version: '2'
 
 services:
+
   nginx:
     image: nginx:1.13.1-alpine
     ports:
       - "80:80"
     volumes:
-      - ./app:/application
-      - ./images/nginx/config/nginx.dev.conf:/etc/nginx/nginx.conf
-      - ./images/nginx/config/web.conf:/etc/nginx/conf.d/default.conf
+      - ./public:/application/public
+      - ./config/nginx/nginx.dev.conf:/etc/nginx/nginx.conf
+      - ./config/nginx/dev.web.conf:/etc/nginx/conf.d/default.conf
     networks:
       - silex-network
     mem_limit: 128000000
     container_name: "nginx"
 
+  # Example composer command for dev environment:
+  # docker-compose -f dev.docker-compose.yml run php \
+    # php -d allow_url_fopen=On /usr/bin/composer require phpunit/phpunit:6.2.3 --dev
   php:
     build:
-      # Note: This is the same as server4001/php-fpm7.0-alpine:0.1.0, but I am leaving build here as a reference.
-      context: ./images/php
-      dockerfile: Dockerfile
+      context: ./
+      dockerfile: ./images/php/dev.Dockerfile
     volumes:
-      - ./images/php/config/php.dev.ini:/etc/php7/php.ini
-      - ./images/php/config/pool.dev.conf:/etc/php7/php-fpm.d/www.conf
-      - ./images/php/config/xdebug.ini:/etc/php7/conf.d/xdebug.ini
-      - ./app:/application
+      - ./config/php/php.dev.ini:/etc/php7/conf.d/50-setting.ini
+      - ./config/php/pool.dev.conf:/etc/php7/php-fpm.d/www.conf
+      - ./config/php/xdebug.ini:/etc/php7/conf.d/xdebug.ini
+      - ./:/application
     networks:
       - silex-network
     mem_limit: 256000000

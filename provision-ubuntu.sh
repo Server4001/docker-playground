@@ -2,35 +2,44 @@
 
 PERSISTENT_DATA_DIR=/var/lib/docker-persistant-data
 
-# Add Docker group.
-groupadd docker
-usermod -aG docker vagrant
-
-# Add docker repo.
-apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-cp /vagrant/config/ubuntu/docker.list /etc/apt/sources.list.d/docker.list
-
-# Install docker.
+# Remove old docker (if present).
 apt-get update
-apt-get purge lxc-docker*
+apt-get purge lxc-docker* docker docker-engine docker.io
 
-apt-get install -y docker-engine
+# Install docker pre-reqs.
+apt-get install -y linux-image-extra-$(uname -r) linux-image-extra-virtual apt-transport-https ca-certificates curl software-properties-common
+
+# Add the docker GPG key.
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+# Add the docker stable repo.
+add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+
+# Install docker ce.
+apt-get update
+apt-get install -y docker-ce=17.06.0~ce-0~ubuntu
 
 # Install docker-compose.
-curl -L https://github.com/docker/compose/releases/download/1.8.0/docker-compose-`uname -s`-`uname -m` > docker-compose
+curl -L https://github.com/docker/compose/releases/download/1.14.0/docker-compose-`uname -s`-`uname -m` > docker-compose
 mv docker-compose /usr/bin/docker-compose
 chmod +x /usr/bin/docker-compose
 
 # Add vim config.
-cp /vagrant/config/ubuntu/vimrc /root/.vimrc /home/vagrant/.vimrc
+cp /vagrant/config/vimrc /root/.vimrc
+cp /vagrant/config/vimrc /home/vagrant/.vimrc
+chown vagrant: /home/vagrant/.vimrc
 
-# Add root user bash auto-completion.
-cp /vagrant/config/ubuntu/root.bashrc /root/.bashrc
+# Add bash auto-completion.
+cp /vagrant/config/root.bashrc /root/.bashrc
+cp /vagrant/config/vagrant.bashrc /home/vagrant/.bashrc
 
 # Add auto-completion for docker-compose.
 curl -L https://raw.githubusercontent.com/docker/compose/$(docker-compose --version | awk 'NR==1{print $NF}')/contrib/completion/bash/docker-compose > docker-compose
 mv docker-compose /etc/bash_completion.d/docker-compose
 chmod 644 /etc/bash_completion.d/docker-compose
+
+# Add vagrant user to docker group.
+usermod -aG docker vagrant
 
 # Add directory for MySql and Redis data storage.
 mkdir ${PERSISTENT_DATA_DIR}

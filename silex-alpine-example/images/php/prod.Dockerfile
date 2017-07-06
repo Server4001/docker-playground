@@ -2,6 +2,10 @@ FROM alpine:3.6
 
 MAINTAINER Brice Bentler "me@bricebentler.com"
 
+COPY . /application/
+
+WORKDIR /application
+
 RUN apk --update add \
     curl \
     php7 \
@@ -27,6 +31,7 @@ RUN apk --update add \
     php7-pdo_sqlite \
     php7-posix \
     php7-sqlite3 \
+    php7-tokenizer \
     php7-xdebug \
     php7-xml \
     php7-xmlreader \
@@ -41,9 +46,12 @@ RUN apk --update add \
     && curl -sS https://getcomposer.org/installer | \
         php -d allow_url_fopen=On -- --install-dir=/usr/bin --filename=composer
 
-COPY config/php.ini /etc/php7/conf.d/50-setting.ini
-COPY config/php-fpm.conf /etc/php7/php-fpm.conf
-COPY config/pool.conf /etc/php7/php-fpm.d/www.conf
+RUN php -d allow_url_fopen=1 /usr/bin/composer install --no-dev --optimize-autoloader \
+    && rm /usr/bin/composer
+
+COPY config/php/php.ini /etc/php7/conf.d/50-setting.ini
+COPY config/php/php-fpm.conf /etc/php7/php-fpm.conf
+COPY config/php/pool.conf /etc/php7/php-fpm.d/www.conf
 
 EXPOSE 9000
 

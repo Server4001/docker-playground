@@ -6,7 +6,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./public:/application
+      - ./public:/application/public
       - ./config/nginx/nginx.dev.conf:/etc/nginx/nginx.conf
       - ./config/nginx/web.conf:/etc/nginx/conf.d/default.conf
     networks:

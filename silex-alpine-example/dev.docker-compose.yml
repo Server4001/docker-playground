@@ -1,6 +1,7 @@
 version: '2'
 
 services:
+
   nginx:
     image: nginx:1.13.1-alpine
     ports:
@@ -19,7 +20,7 @@ services:
       context: ./
       dockerfile: ./images/php/dev.Dockerfile
     volumes:
-      - ./config/php/php.dev.ini:/etc/php7/php.ini
+      - ./config/php/php.dev.ini:/etc/php7/conf.d/50-setting.ini
       - ./config/php/pool.dev.conf:/etc/php7/php-fpm.d/www.conf
       - ./config/php/xdebug.ini:/etc/php7/conf.d/xdebug.ini
       - ./:/application

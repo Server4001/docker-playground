@@ -2,6 +2,8 @@ FROM alpine:3.6
 
 MAINTAINER Brice Bentler "me@bricebentler.com"
 
+WORKDIR /application
+
 RUN apk --update add \
     curl \
     php7 \

@@ -25,13 +25,13 @@ mv docker-compose /usr/bin/docker-compose
 chmod +x /usr/bin/docker-compose
 
 # Add vim config.
-cp /vagrant/config/ubuntu/vimrc /root/.vimrc
-cp /vagrant/config/ubuntu/vimrc /home/vagrant/.vimrc
+cp /vagrant/config/vimrc /root/.vimrc
+cp /vagrant/config/vimrc /home/vagrant/.vimrc
 chown vagrant: /home/vagrant/.vimrc
 
 # Add bash auto-completion.
-cp /vagrant/config/ubuntu/root.bashrc /root/.bashrc
-cp /vagrant/config/ubuntu/vagrant.bashrc /home/vagrant/.bashrc
+cp /vagrant/config/root.bashrc /root/.bashrc
+cp /vagrant/config/vagrant.bashrc /home/vagrant/.bashrc
 
 # Add auto-completion for docker-compose.
 curl -L https://raw.githubusercontent.com/docker/compose/$(docker-compose --version | awk 'NR==1{print $NF}')/contrib/completion/bash/docker-compose > docker-compose

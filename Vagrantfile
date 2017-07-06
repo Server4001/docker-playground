@@ -7,7 +7,7 @@ Vagrant.configure(2) do |config|
   config.vm.network :private_network, ip: "192.168.35.41"
   config.vm.network :forwarded_port, guest: 22, host: 6291, auto_correct: true
 
-#   config.vm.provision :shell, path: "provision-ubuntu.sh", privileged: true
+  config.vm.provision :shell, path: "provision-ubuntu.sh", privileged: true
   config.vm.hostname = "dev.dockerubuntu.loc"
 
   config.vm.synced_folder "./", "/vagrant", mount_options: ["dmode=775,fmode=664"]

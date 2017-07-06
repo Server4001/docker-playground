@@ -29,8 +29,9 @@ cp /vagrant/config/ubuntu/vimrc /root/.vimrc
 cp /vagrant/config/ubuntu/vimrc /home/vagrant/.vimrc
 chown vagrant: /home/vagrant/.vimrc
 
-# Add root user bash auto-completion.
+# Add bash auto-completion.
 cp /vagrant/config/ubuntu/root.bashrc /root/.bashrc
+cp /vagrant/config/ubuntu/vagrant.bashrc /home/vagrant/.bashrc
 
 # Add auto-completion for docker-compose.
 curl -L https://raw.githubusercontent.com/docker/compose/$(docker-compose --version | awk 'NR==1{print $NF}')/contrib/completion/bash/docker-compose > docker-compose

@@ -26,6 +26,21 @@ services:
     mem_limit: 256000000
     container_name: "php"
 
+  # TODO : Remove. Likely RDS would be used.
+  db:
+    image: sameersbn/mysql:latest
+    volumes:
+      - /var/lib/docker-persistant-data/mysql-storage:/var/lib/mysql
+    environment:
+      - DB_NAME=silex
+      - DB_USER=silex_user
+      - DB_PASS=silex_password
+    networks:
+      - silex-network
+    mem_limit: 128000000
+    container_name: "db"
+
+  # TODO : Remove. Likely Elasticache (or similar) would be used.
   memcached:
     image: memcached:1.4.38-alpine
     command: memcached -m 128
@@ -34,6 +49,7 @@ services:
     mem_limit: 128000000
     container_name: "memcached"
 
+  # TODO : Remove. Likely Elasticache (or similar) would be used.
   redis:
     image: redis:3.2.9-alpine
     command: redis-server --appendonly yes

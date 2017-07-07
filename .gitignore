@@ -8,6 +8,7 @@ nodejs-example/node_modules
 redis-storage
 mysql-storage
 /silex-alpine-example/vendor
+/silex-alpine-example/composer-cache
 /laravel-example/node_modules
 /laravel-example/public/storage
 /laravel-example/vendor

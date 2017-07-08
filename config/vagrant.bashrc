@@ -93,13 +93,13 @@ alias l='ls -CF'
 dev-compose() {
     dir_cache=$(pwd)
     cd /vagrant/silex-alpine-example
-    docker-compose -f dev.docker-compose.yml $@
+    docker-compose -f docker/dev.docker-compose.yml $@
     cd $dir_cache
 }
 prod-compose() {
     dir_cache=$(pwd)
     cd /vagrant/silex-alpine-example
-    docker-compose -f prod.docker-compose.yml $@
+    docker-compose -f docker/prod.docker-compose.yml $@
     cd $dir_cache
 }
 

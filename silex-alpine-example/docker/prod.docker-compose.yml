@@ -3,38 +3,30 @@ version: '2'
 services:
 
   nginx:
-    image: nginx:1.13.1-alpine
-    ports:
-      - "80:80"
+    # docker build -f ./docker/nginx/prod.Dockerfile -t server4001/silex-nginx-prod:0.1.0 .
+    image: server4001/silex-nginx-prod:0.1.0
     volumes:
-      - ./public:/application/public
-      - ./config/nginx/nginx.dev.conf:/etc/nginx/nginx.conf
-      - ./config/nginx/dev.web.conf:/etc/nginx/conf.d/default.conf
+      # Where $LE_DIR === './certs'
+      - "${LE_DIR}:/etc/letsencrypt"
+    ports:
+      - 80:80
+      - 443:443
     networks:
       - silex-network
     mem_limit: 128000000
     container_name: "nginx"
 
-  # Example composer command for dev environment:
-  # docker-compose -f dev.docker-compose.yml run php \
-    # php -d allow_url_fopen=On /usr/bin/composer require phpunit/phpunit:6.2.3 --dev
   php:
-    build:
-      context: ./
-      dockerfile: ./images/php/dev.Dockerfile
-    volumes:
-      - ./config/php/php.dev.ini:/etc/php7/conf.d/50-setting.ini
-      - ./config/php/pool.dev.conf:/etc/php7/php-fpm.d/www.conf
-      - ./config/php/xdebug.ini:/etc/php7/conf.d/xdebug.ini
-      - ./composer-cache:/tmp/composer
-      - ./:/application
-    environment:
-      - COMPOSER_CACHE_DIR=/tmp/composer
+    # docker build -f ./docker/php/prod.Dockerfile -t server4001/silex-php-prod:0.1.0 .
+    image: server4001/silex-php-prod:0.1.0
+    working_dir: /application
+    env_file: ../.env.prod
     networks:
       - silex-network
     mem_limit: 256000000
     container_name: "php"
 
+  # TODO : Remove. Likely RDS would be used.
   db:
     image: sameersbn/mysql:latest
     volumes:
@@ -48,6 +40,7 @@ services:
     mem_limit: 128000000
     container_name: "db"
 
+  # TODO : Remove. Likely Elasticache (or similar) would be used.
   memcached:
     image: memcached:1.4.38-alpine
     command: memcached -m 128
@@ -56,6 +49,7 @@ services:
     mem_limit: 128000000
     container_name: "memcached"
 
+  # TODO : Remove. Likely Elasticache (or similar) would be used.
   redis:
     image: redis:3.2.9-alpine
     command: redis-server --appendonly yes

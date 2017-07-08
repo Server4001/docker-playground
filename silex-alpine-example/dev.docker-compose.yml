@@ -28,6 +28,8 @@ services:
       - ./config/php/xdebug.ini:/etc/php7/conf.d/xdebug.ini
       - ./composer-cache:/tmp/composer
       - ./:/application
+    environment:
+      - COMPOSER_CACHE_DIR=/tmp/composer
     networks:
       - silex-network
     mem_limit: 256000000

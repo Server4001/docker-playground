@@ -3,8 +3,6 @@ FROM alpine:3.6
 MAINTAINER Brice Bentler "me@bricebentler.com"
 
 WORKDIR /application
-# TODO : Consider moving this to an environment variable in the dev docker-compose file.
-ENV COMPOSER_CACHE_DIR=/tmp/composer
 
 RUN apk --update add \
     curl \

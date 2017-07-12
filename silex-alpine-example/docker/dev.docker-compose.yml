@@ -26,7 +26,7 @@ services:
       - ../config/php/php.dev.ini:/etc/php7/conf.d/50-setting.ini
       - ../config/php/pool.dev.conf:/etc/php7/php-fpm.d/www.conf
       - ../config/php/xdebug.ini:/etc/php7/conf.d/xdebug.ini
-      - /tmp/composer-cache:/tmp/composer
+      - ../composer-cache:/tmp/composer
       - ../:/application
     environment:
       - COMPOSER_CACHE_DIR=/tmp/composer
@@ -38,7 +38,7 @@ services:
   db:
     image: sameersbn/mysql:latest
     volumes:
-      - /var/lib/docker-persistant-data/mysql-storage:/var/lib/mysql
+      - ../docker-persistant-data/mysql-storage:/var/lib/mysql
     environment:
       - DB_NAME=silex
       - DB_USER=silex_user
@@ -60,7 +60,7 @@ services:
     image: redis:3.2.9-alpine
     command: redis-server --appendonly yes
     volumes:
-      - /var/lib/docker-persistant-data/redis-storage:/data
+      - ../docker-persistant-data/redis-storage:/data
     networks:
       - silex-network
     mem_limit: 128000000

@@ -29,7 +29,7 @@ services:
   db:
     image: sameersbn/mysql:latest
     volumes:
-      - /var/lib/docker-persistant-data/mysql-storage:/var/lib/mysql
+      - ../docker-persistant-data/mysql-storage:/var/lib/mysql
     environment:
       - DB_NAME=silex
       - DB_USER=silex_user
@@ -53,7 +53,7 @@ services:
     image: redis:3.2.9-alpine
     command: redis-server --appendonly yes
     volumes:
-      - /var/lib/docker-persistant-data/redis-storage:/data
+      - ../docker-persistant-data/redis-storage:/data
     networks:
       - silex-network
     mem_limit: 128000000

@@ -44,3 +44,18 @@ usermod -aG docker vagrant
 # Add directory for MySql and Redis data storage.
 mkdir ${PERSISTENT_DATA_DIR}
 chown vagrant: ${PERSISTENT_DATA_DIR}
+
+# Install Java 8.
+add-apt-repository -y ppa:webupd8team/java
+apt-get update
+echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
+echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections
+apt-get install -y oracle-java8-installer > /dev/null
+
+# Set up Jenkins repo.
+wget -q -O - https://jenkins-ci.org/debian/jenkins-ci.org.key | apt-key add -
+sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list'
+apt-get update
+
+# Install Jenkins.
+apt-get install -y jenkins

@@ -10,7 +10,7 @@ Vagrant.configure(2) do |config|
   config.vm.provision :shell, path: "provision-ubuntu.sh", privileged: true
   config.vm.hostname = "dev.dockerubuntu.loc"
 
-  config.vm.synced_folder "./", "/vagrant", mount_options: ["dmode=775,fmode=664"]
+  config.vm.synced_folder "./", "/vagrant", mount_options: ["dmode=777,fmode=777"]
 
   config.vm.provider "virtualbox" do |vb|
     vb.customize ["modifyvm", :id, "--cpuexecutioncap", "90"]

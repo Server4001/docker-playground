@@ -19,6 +19,9 @@ add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(
 apt-get update
 apt-get install -y docker-ce=17.06.0~ce-0~ubuntu
 
+# Ensure docker starts at boot.
+ update-rc.d docker defaults
+
 # Install docker-compose.
 curl -L https://github.com/docker/compose/releases/download/1.14.0/docker-compose-`uname -s`-`uname -m` > docker-compose 2> /dev/null
 mv docker-compose /usr/bin/docker-compose
@@ -59,3 +62,6 @@ apt-get update
 
 # Install Jenkins.
 apt-get install -y jenkins
+
+# Ensure Jenkins starts at boot.
+update-rc.d jenkins defaults

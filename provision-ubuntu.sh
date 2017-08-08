@@ -41,9 +41,6 @@ curl -L https://raw.githubusercontent.com/docker/compose/$(docker-compose --vers
 mv docker-compose /etc/bash_completion.d/docker-compose
 chmod 644 /etc/bash_completion.d/docker-compose
 
-# Add vagrant user to docker group.
-usermod -aG docker vagrant
-
 # Add directory for MySql and Redis data storage.
 mkdir ${PERSISTENT_DATA_DIR}
 chown vagrant: ${PERSISTENT_DATA_DIR}
@@ -61,7 +58,11 @@ sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list
 apt-get update
 
 # Install Jenkins.
-apt-get install -y jenkins
+apt-get install -y jenkins=2.68
 
 # Ensure Jenkins starts at boot.
 update-rc.d jenkins defaults
+
+# Add users to docker group.
+usermod -aG docker vagrant
+usermod -aG docker jenkins

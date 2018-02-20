@@ -1,0 +1,44 @@
+---
+- name: Create a docker image
+  hosts: localhost
+  connection: local
+  gather_facts: False
+
+  # NOTE: ansible-container won't work with images like Alpine Linux, as Python is needed.
+
+  vars:
+    image: phusion/baseimage:latest
+    container_name: build_phusionbase
+    image_name: server4001/nginx-phusionbase
+
+  tasks:
+    - name: Make the base image available locally
+      docker_image:
+        name: '{{ image }}'
+
+    - name: Create the container
+      docker_container:
+        image: '{{ image }}'
+        name: '{{ container_name }}'
+        command: /bin/sleep 365d
+
+    - name: Add the newly created container to the inventory
+      add_host:
+        hostname: '{{ container_name }}'
+        ansible_connection: docker
+        ansible_python_interpreter: /usr/bin/python3
+
+    - name: Run the role in the container
+      delegate_to: '{{ container_name }}'
+      include_role:
+        name: nginx
+
+    - name: Commit the container
+      command: docker commit \
+        -c 'CMD ["nginx", "-g", "daemon off;"]' \
+        {{ container_name }} {{ image_name }}
+
+    - name: Remove the container
+      docker_container:
+        name: '{{ container_name }}'
+        state: absent

@@ -7,12 +7,11 @@ Vagrant.configure(2) do |config|
   config.vm.network :private_network, ip: "192.168.35.41"
   config.vm.network :forwarded_port, guest: 22, host: 6291, auto_correct: true
 
+  config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
   config.vm.provision :shell, path: "provision-ubuntu.sh", privileged: true
   config.vm.hostname = "dev.dockerubuntu.loc"
 
   config.vm.synced_folder "./", "/vagrant", mount_options: ["dmode=777,fmode=777"]
-
-  config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
 
   config.vm.provider "virtualbox" do |vb|
     vb.customize ["modifyvm", :id, "--cpuexecutioncap", "90"]

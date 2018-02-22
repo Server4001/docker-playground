@@ -58,7 +58,10 @@ sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list
 apt-get update
 
 # Install Jenkins.
-apt-get install -y jenkins=2.68
+apt-get install -y jenkins=2.108
+# Originally ran:
+# apt-get install -y jenkins=2.68
+# apt-get install jenkins # Upgraded to 2.108
 
 # Ensure Jenkins starts at boot.
 update-rc.d jenkins defaults

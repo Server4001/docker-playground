@@ -76,5 +76,18 @@ if [ ! -f /usr/bin/kubelet ] || [ ! -f /usr/bin/kubeadm ] || [ ! -f /usr/bin/kub
 #  systemctl restart kubelet
 
 
-#  kubeadm init
+  kubeadm init
 fi
+
+if [ ! -f /home/vagrant/.kube/config ]; then
+  mkdir -p /home/vagrant/.kube
+  cp /etc/kubernetes/admin.conf /home/vagrant/.kube/config
+  chown -R vagrant:vagrant /home/vagrant/.kube
+fi
+
+# You should now deploy a pod network to the cluster.
+# Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+#   https://kubernetes.io/docs/concepts/cluster-administration/addons/
+# You can now join any number of machines by running the following on each node
+# as root:
+#   kubeadm join 10.0.2.15:6443 --token xazcn1.mcd4cqvuirxnsqv5 --discovery-token-ca-cert-hash sha256:146834e70c86861ce84a90304407f1f0d6d0219dfd9f3fc3ded559c4a8c76ed0
